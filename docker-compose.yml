@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+  api:
+    build: ./simple_api
+    networks:
+      - zed-network
+    ports:
+      - '5000:5000'
+
+
+  website:
+    build: ./website
+    networks:
+      - zed-network
+    ports:
+      - '8080:80'
+    depends_on:
+      - api
+
+
+networks:
+  zed-network:
