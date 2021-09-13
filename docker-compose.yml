@@ -1,22 +1,22 @@
 version: '3.3'
 services:
   api:
-    build: ./simple_api
+    image: simple-api:1
     networks:
       - zed-network
-    ports:
-      - '5000:5000'
-
 
   website:
-    build: ./website
+    image: php:8.0-apache
+    environment:
+      - USERNAME=toto
+      - PASSWORD=python
+    volumes:
+      - ./website:/var/www/html
     networks:
       - zed-network
     ports:
       - '8080:80'
     depends_on:
       - api
-
-
 networks:
   zed-network:
